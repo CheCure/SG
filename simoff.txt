@@ -1,0 +1,4 @@
+/** WEBDRIVER SETUP  Remove next two line comments to use simulator **/
+// var sim = require('./lib/simulator.js');
+// var assert = sim.assert; var $driver = sim.driver; var $browser = sim.browser; var $util = sim.util;
+/** WEBDRIVER SETUP   **/

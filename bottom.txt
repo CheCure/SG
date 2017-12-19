@@ -1,0 +1,7 @@
+.then(function() {
+   console.log ('Browser script execution SUCCEEDED.');
+}, function(err) {
+   console.log ('Browser script execution FAILED.');
+   throw(err);
+});
+

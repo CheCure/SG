@@ -1,0 +1,238 @@
+<html>
+<head>
+<link rel="stylesheet" href="bootstrap.min.css">
+<title>Synthetic Script Generator</title>
+<style>
+body {
+	background-color: #FCFCFC;
+	font-family: Arial;
+
+}
+#mytable input{
+          width:100%;
+        }
+.submit-btn { 
+		color: navy; background-color: #ccccff; border: 1px solid navy; font-size: 22px;
+}
+.whiteback {
+	background-color: #ffffff;
+	font-face: courier, arial;
+}
+.inst {
+	font-size: 20px;
+	color: black;
+}
+.small {
+	font-size: 12px;
+	color: black;
+}
+.scriptfont {
+	font-face: courier, arial;
+	font-size: 12px;
+	}
+
+		
+</style>
+<script>
+
+function view_script (form) {
+	var error = false;
+
+	if (error == false && isBlank(form.url,"URL")) {
+      		error = true;
+		return false;
+  	}
+	
+
+	return true;
+}
+ 
+
+
+function isBlank(field,msg) {
+ var str = field.value;
+ if (str == "") {
+    field.focus();
+    field.select();
+    alert ("You MUST enter "+msg+" "+field.value);
+    return true ;
+ } else {
+    return false ;
+ }
+}
+
+function badNumber(field,msg) {
+  var str = field.value;
+  for (var i=0;i<str.length;i++) {
+      var ch = str.substring(i,i+1)
+      if ((ch<"0" || "9"<ch)&&(ch!=" ") && (ch!=".") && (ch!="-") ){
+         field.focus();
+         field.select();
+         msg = msg + " field must be numeric: " + field.value;
+         alert(msg);
+         return true;
+      }
+  }
+  return false;
+}
+</script>
+</head>
+
+<body ng-app="myApp" ng-controller="MainController">
+<form name="SG">  
+      <h1 align="center" style="color:#428bca">Synthetic Script Generator </h1>
+	  
+	  <center>
+	  <table width=80% cellpadding="5" >
+	  <tr>
+	  <td colspan=2>
+	  Starting URL: 	   
+	  <input type="text" name="url" size="60" placeholder="https://www.xyz.com" ng-model="myurl">
+	  </td>
+	  </tr>
+	  
+	  <tr>
+	  <td>
+	  Do you want Simulator.js ON?
+	  &nbsp;
+		
+		<input type="radio" name="simjs" ng-model="simjs" value="Y">Yes
+		<input type="radio" name="simjs" ng-model="simjs" value="N">No
+	  </td>
+	  
+	  <td>
+	  Do you want to log steps into Insights?
+	  &nbsp;
+		
+		<input type="radio" name="logproc" ng-model="logproc" value="Y">Yes
+		<input type="radio" name="logproc" ng-model="logproc" value="N">No
+	  </td>
+	  </tr>
+	  </table>
+	  </center>
+
+<div class="container">
+     <div class="row">
+      <button type="button" style="float:right;margin-bottom: 10px;" class="btn btn-info " ng-click="addStep()">Add Script Step</button>
+            <div class="col-md-12">
+
+                <div class="table-responsive">
+                  <form  id="empform"  ng-submit="submitStep()">
+                    <table id="mytable" class="table table-bordered">
+
+                        <thead>
+                        <th style="width:5%;">Step:</th>
+                        <th style="width:35%;">Step Action:</th>
+						<th style="width:35%;">Listen by:</th>                             
+						<th style="width:20%;">Script step:</th>                     
+                        </thead>
+
+                        <tbody>
+                 
+              <tr ng-repeat="step in steps">
+                <td>{{$index+1}}</td>
+                <td>
+                   <select  name="stepaction{{$index}}" ng-model="step.stepaction" ng-disabled="!enabledEdit[{{$index}}]"/>
+				    <option value="Click">Click  
+				    <option value="Enter">Send text
+					<option value="Validate">Validate text
+					<option value="log">Console Log
+					<option value="sleep">Sleep  
+					
+					</select>	 
+					<br>
+					<font class=small>Text to enter or log or sleep millisenconds:</font><br>
+					<input name="actiontxt{{$index}}" ng-model="step.actiontxt"  ng-disabled="!enabledEdit[{{$index}}]" />
+                </td>
+				<td>
+                   <select  name="steplisten{{$index}}" ng-model="step.steplisten" ng-disabled="!enabledEdit[{{$index}}]"/>
+				    <option value="By.id">Listen By Id
+				    <option value="By.className">Listen By className
+				    <option value="By.linkText">Listen By linkText
+				    <option value="By.partialLinkText">Listen By partialLinkText
+				    <option value="By.xpath">Listen By xpath
+				    			
+				</select>	  
+					<br>
+					<font class=small>String to listen for:</font><br>
+					<input name="listentxt{{$index}}" ng-model="step.listentxt"  ng-disabled="!enabledEdit[{{$index}}]" />
+                </td>
+				
+                 
+                   
+                 
+                 
+                <td >
+                  <div class="buttons">
+                    <!--<button class="btn btn-primary" ng-click="editStep($index)">Edit</button>-->
+					<button type="button" class="btn btn-info " ng-click="addStep()">Add Step</button>
+                    <button class="btn btn-danger" ng-click="deleteStep($index)">Delete</button>
+                  </div>  
+                </td>
+              </tr>
+              
+                        </tbody>
+
+                    </table>
+					<center>
+					 				 
+                      <!-- <input type="submit" class="submit-btn" value="Create synthetic script2" /> -->
+
+					  <!-- <input type="button" class="btn btn-info " ng-click="submitStep()" onclick="view_script(SG)" value="View Generated Script"/> -->
+						<button class="btn btn-info " ng-click="createScript()" onclick="view_script(SG)" >View Generated Script</button>
+					  </center>
+                   </form>
+                    <div class="clearfix"></div>
+                 </div>
+
+            </div>
+			  
+  </div>
+<div ng-if="top && myurl">
+<font class=inst><i>Copy/paste the following code into your favorite editor:</i></font>  
+</div>
+<div ng-if="top && myurl" >
+<PRE>
+//Top of script: 
+<span style="white-space:pre">
+{{simulator}}
+{{top}}
+</span> 
+//Dynamic portion ...
+
+// GET URL...
+{{geturl}} 
+
+ 
+<table>
+<tr ng-repeat="step in steps">
+<td>
+<font class="scriptfont">
+// Step # {{step.stepnum}}  
+<span style="white-space:pre">
+{{step.cmd}} 
+</span>
+
+</font>
+</td> 
+
+</tr>
+</table>
+<span style="white-space:pre"> 
+<br>
+//Bottom of script:
+{{bottom}}
+</span>	
+//
+</PRE> 
+ 
+</div>
+</form>
+</body>
+
+    <script src="jquery.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <script src="angular.min.js"></script>
+    <script type="text/javascript" src="steps.js"></script>
+   
+</html>
