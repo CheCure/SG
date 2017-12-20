@@ -29,8 +29,17 @@ body {
 .scriptfont {
 	font-face: courier, arial;
 	font-size: 12px;
-	}
+}
 
+.selectable{
+    -webkit-touch-callout: all; /* iOS Safari */
+    -webkit-user-select: all; /* Safari */
+    -khtml-user-select: all; /* Konqueror HTML */
+    -moz-user-select: all; /* Firefox */
+    -ms-user-select: all; /* Internet Explorer/Edge */
+    user-select: all; /* Chrome and Opera */
+
+}
 		
 </style>
 <script>
@@ -42,12 +51,14 @@ function view_script (form) {
       		error = true;
 		return false;
   	}
-	
-
 	return true;
 }
- 
 
+
+ 
+ 
+ 
+ 
 
 function isBlank(field,msg) {
  var str = field.value;
@@ -157,9 +168,7 @@ function badNumber(field,msg) {
 					<font class=small>String to listen for:</font><br>
 					<input name="listentxt{{$index}}" ng-model="step.listentxt"  ng-disabled="!enabledEdit[{{$index}}]" />
                 </td>
-				
-                 
-                   
+				                       
                  
                  
                 <td >
@@ -189,50 +198,56 @@ function badNumber(field,msg) {
 			  
   </div>
 <div ng-if="top && myurl">
-<font class=inst><i>Copy/paste the following code into your favorite editor:</i></font>  
+<font class=inst><i>Click inside box to select text and copy/paste into your favorite editor...</i></font> &nbsp;  
 </div>
+<div id="myscript" class="selectable">
 <div ng-if="top && myurl" >
 <PRE>
-//Top of script: 
 <span style="white-space:pre">
+//Top of script: 
 {{simulator}}
 {{top}}
 </span> 
 //Dynamic portion ...
-
 // GET URL...
-{{geturl}} 
-
- 
+{{geturl}}  
 <table>
 <tr ng-repeat="step in steps">
 <td>
 <font class="scriptfont">
 // Step # {{step.stepnum}}  
-<span style="white-space:pre">
+<span style="white-space:pre"> 
 {{step.cmd}} 
 </span>
-
 </font>
 </td> 
-
 </tr>
 </table>
 <span style="white-space:pre"> 
-<br>
 //Bottom of script:
 {{bottom}}
 </span>	
-//
-</PRE> 
- 
+</PRE>
 </div>
+</div>
+<div ng-if="top && myurl" >
+ 
+
+<p>
+<center>
+<a href=https://github.com/CheCure/SG>github</a>
+</center>
+</div>
+ 
+ 
 </form>
 </body>
 
-    <script src="jquery.js"></script>
-    <script src="bootstrap.min.js"></script>
-    <script src="angular.min.js"></script>
-    <script type="text/javascript" src="steps.js"></script>
+<script src="jquery.js"></script>
+<script src="bootstrap.min.js"></script>
+<script src="angular.min.js"></script>
+<script type="text/javascript" src="steps.js"></script>
+<p>
+
    
 </html>
