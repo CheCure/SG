@@ -17,9 +17,9 @@ startTime = Date.now(),
 stepStartTime = Date.now(),
 lastStep = 9999,
 VARS = {};
- 
+
 var log = function(thisLabel) {
-   NowNow= Date.now();
+   var NowNow= Date.now();
    var elapsedTime = 0;
    elapsedTime = NowNow - startTime;
    console.log (thisLabel + ":" + elapsedTime);
