@@ -11,7 +11,10 @@ app.controller("MainController", function($scope,$http){
 	$scope.steps = angular.copy( $scope.data);
 	$scope.enabledEdit =[];
 	 
-	 
+	$scope.setupSteps = function() {
+		$scope.steps = angular.fromJson($scope.previous_json);
+	}
+	 	 
     $scope.addStep = function(){
 	    var step ={ actiontxt:"",cmd:"",stepaction:"",steplisten:"",listentxt:"",stepnum:"",disableEdit:false};
 		
@@ -28,6 +31,8 @@ app.controller("MainController", function($scope,$http){
 	
 	$scope.createScript = function(){
 		console.log("Script Steps: "+angular.toJson($scope.steps ));
+		
+		$scope.previous_json = angular.toJson($scope.steps);
 		
 		var arrayLength = $scope.steps.length;
 		console.log("Length: "+arrayLength);
