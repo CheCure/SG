@@ -55,11 +55,6 @@ function view_script (form) {
 }
 
 
- 
- 
- 
- 
-
 function isBlank(field,msg) {
  var str = field.value;
  if (str == "") {
@@ -91,7 +86,14 @@ function badNumber(field,msg) {
 
 <body ng-app="myApp" ng-controller="MainController">
 <form name="SG">  
-      <h1 align="center" style="color:#428bca">Synthetic Script Generator </h1>
+<table width="100%">
+<tr>
+<td width="15%" valign="top" align="center" > &nbsp; </td>
+<td align=center><h1 align="center" style="color:#428bca">Synthetic Script Generator </h1></td>
+<td width=15%" valign="top" align="center"><a href="https://docs.newrelic.com/docs/synthetics/new-relic-synthetics/scripting-monitors/write-scripted-browsers">Doc</a>
+&nbsp;
+<a href=https://github.com/CheCure/SG>github</a></td>	  
+ </tr></table>
 	  
 	  <center>
 	  <table width=80% cellpadding="5" >
@@ -228,14 +230,14 @@ function badNumber(field,msg) {
 </PRE>
 </div>
 </div>
-<div ng-if="top && myurl" >
+ 
  
 
-<p>
-<center>
-<a href=https://github.com/CheCure/SG>github</a>
-</center>
-</div>
+ 
+ 
+
+ 
+ 
  
  
 </form>
