@@ -14,7 +14,7 @@ body {
 }
 #mytable input{
           width:100%;
-        }
+}
 .submit-btn { 
 		color: navy; background-color: #ccccff; border: 1px solid navy; font-size: 22px;
 }
@@ -254,13 +254,13 @@ function badNumber(field,msg) {
 &nbsp;<p>&nbsp;<p>&nbsp;<p>
 <table width="80%"><tr><td>
 <font class=small>
-<i>To use a previously run JSON steps, paste them here ...</i><br>
- <textarea id="previous_json" name="previous_json" ng-model="previous_json" rows="3" cols="100" ></textarea>
+<i>To use previous values, paste them here ...</i><br>
+ <textarea id="previous_json" name="previous_json" ng-model="previous_data" rows="3" cols="100" ></textarea>
   
- <div ng-if="previous_json">
+ <div ng-if="previous_data">
  <br>
- <button type="button"  class="btn btn-info" onClick="cc()">Copy above JSON</button>  
- <button type="button"  class="btn btn-info " ng-click="setupSteps()">Apply previous JSON</button>
+ <button type="button"  class="btn btn-info" onClick="cc()">Copy</button>  
+ <button type="button"  class="btn btn-info " ng-click="setupSteps()">Apply previous</button>
  </div>
  </font>
  </td>

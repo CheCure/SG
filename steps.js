@@ -12,6 +12,11 @@ app.controller("MainController", function($scope,$http){
 	$scope.enabledEdit =[];
 	 
 	$scope.setupSteps = function() {
+		var saved_data = $scope.previous_data.split('~');
+		$scope.myurl = saved_data[0];	
+		$scope.simjs = saved_data[1];
+		$scope.logproc = saved_data[2];
+		$scope.previous_json = saved_data[3];
 		$scope.steps = angular.fromJson($scope.previous_json);
 	}
 	 	 
@@ -32,7 +37,7 @@ app.controller("MainController", function($scope,$http){
 	$scope.createScript = function(){
 		console.log("Script Steps: "+angular.toJson($scope.steps ));
 		
-		$scope.previous_json = angular.toJson($scope.steps);
+		$scope.previous_data = $scope.myurl + "~" + $scope.simjs + "~" + $scope.logproc + "~" + angular.toJson($scope.steps);
 		
 		var arrayLength = $scope.steps.length;
 		console.log("Length: "+arrayLength);
@@ -83,18 +88,14 @@ app.controller("MainController", function($scope,$http){
 				}
 				
 				$scope.steps[i].cmd=this_step;
-				$scope.steps[i].stepnum=i+1;
-				
-				
+				$scope.steps[i].stepnum=i+1;				
 							
 				console.log("Step: "+$scope.steps[i].cmd+":"+this_step);				
 							
 			
 		}
 				
-		$scope.gotfiles = $scope.gotfiles || false;
-		
-				 
+		$scope.gotfiles = $scope.gotfiles || false;				 
 		
 		console.log("simjs="+$scope.simjs+" logfile="+$scope.logfile+" Got Files:"+$scope.gotfiles);
 		
@@ -127,18 +128,9 @@ app.controller("MainController", function($scope,$http){
 				})
 				}
 				
-				 
-		  
-				$scope.gotfiles = true;
-				 
-		
-			  
-		 
-
-		
-		 
-		 
-             
+				 		  
+				$scope.gotfiles = true;			 	
+			  		 		 		              
 	}
 
 });
