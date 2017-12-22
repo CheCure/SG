@@ -172,7 +172,7 @@ function badNumber(field,msg) {
 					
 					</select>	 
 					<br>
-					<font class=small>Text to enter or log or sleep millisenconds:</font><br>
+					<font class=small>Text to enter or log or sleep milliseconds:</font><br>
 					<input name="actiontxt{{$index}}" ng-model="step.actiontxt"  ng-disabled="!enabledEdit[{{$index}}]" />
                 </td>
 				<td>
@@ -250,30 +250,21 @@ function badNumber(field,msg) {
 </div>
 
  
- 
 &nbsp;<p>&nbsp;<p>&nbsp;<p>
 <table width="80%"><tr><td>
 <font class=small>
-<i>To use previous values, paste them here ...</i><br>
+<i>To use previous JSON values, paste JSON here ...</i><br>
  <textarea id="previous_json" name="previous_json" ng-model="previous_data" rows="3" cols="100" ></textarea>
   
  <div ng-if="previous_data">
  <br>
- <button type="button"  class="btn btn-info" onClick="cc()">Copy</button>  
- <button type="button"  class="btn btn-info " ng-click="setupSteps()">Apply previous</button>
+ <button type="button"  class="btn btn-info" onClick="cc()">Copy JSON</button>  
+ <button type="button"  class="btn btn-info " ng-click="setupSteps()">Apply previous JSON</button>
  </div>
  </font>
  </td>
  </tr>
  </table>
- 
- 
- 
- 
-
- 
- 
- 
  
  
 </form>
