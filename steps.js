@@ -11,13 +11,13 @@ app.controller("MainController", function($scope,$http){
 	$scope.steps = angular.copy( $scope.data);
 	$scope.enabledEdit =[];
 	 
-	$scope.setupSteps = function() {
-		var saved_data = $scope.previous_data.split('~');
-		$scope.myurl = saved_data[0];	
-		$scope.simjs = saved_data[1];
-		$scope.logproc = saved_data[2];
-		$scope.previous_json = saved_data[3];
-		$scope.steps = angular.fromJson($scope.previous_json);
+	 
+	$scope.setupSteps = function() {		 
+		var previous_data = JSON.parse($scope.previous_data);	
+		$scope.myurl = previous_data.myurl;
+		$scope.simjs = previous_data.simjs;
+		$scope.logproc = previous_data.logproc;
+		$scope.steps = previous_data.steps;		
 	}
 	 	 
     $scope.addStep = function(){
@@ -37,7 +37,9 @@ app.controller("MainController", function($scope,$http){
 	$scope.createScript = function(){
 		console.log("Script Steps: "+angular.toJson($scope.steps ));
 		
-		$scope.previous_data = $scope.myurl + "~" + $scope.simjs + "~" + $scope.logproc + "~" + angular.toJson($scope.steps);
+		//$scope.previous_data = $scope.myurl + "~" + $scope.simjs + "~" + $scope.logproc + "~" + angular.toJson($scope.steps);
+		
+		$scope.previous_data = '{"myurl":"'+$scope.myurl+'","simjs":"'+$scope.simjs+'","logproc":"'+$scope.logproc+'","steps":' + angular.toJson($scope.steps) + '}';
 		
 		var arrayLength = $scope.steps.length;
 		console.log("Length: "+arrayLength);
