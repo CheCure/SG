@@ -112,7 +112,7 @@ function badNumber(field,msg) {
 
 <body ng-app="myApp" ng-controller="MainController">
 <form name="SG">  
-<table width="100%">
+<table width="100%" cellpadding="8">
 <tr>
 <td width="50%" valign="top">
 <table width="100%"><tr><td valign="top"><font class="title1"> &nbsp; Synthetic Script Generator</font></td></tr></table>
@@ -120,9 +120,9 @@ function badNumber(field,msg) {
 <td width="50%" valign="top" align="right">
 <table width="100%">
 <tr>
-<td width="33%"><a href=“https://docs.newrelic.com/docs/synthetics/new-relic-synthetics/scripting-monitors/write-scripted-browsers“>Doc</a></td>
-<td width="33%"><a href=https://github.com/CheCure/SG>github</a></td>
-<td width="33%"><a onclick=‘publishCode();’>Publish Script Toggle</a></td>
+<td width="33%"><a href="https://docs.newrelic.com/docs/synthetics/new-relic-synthetics/scripting-monitors/write-scripted-browsers">Doc</a></td>
+<td width="33%"><a href="https://github.com/CheCure/SG">github</a></td>
+<td width="33%"><a onclick="publishCode();">Publish Script Toggle</a></td>
 </tr>
 </table>
 </td>
@@ -199,10 +199,14 @@ function badNumber(field,msg) {
 				    <option value="By.partialLinkText">Listen By partialLinkText
 				    <option value="By.xpath">Listen By xpath
 				    			
-				</select>	  
+					</select>	  
 					<br>
 					<font class=small>String to listen for:</font><br>
 					<input name="listentxt{{$index}}" ng-model="step.listentxt"  ng-disabled="!enabledEdit[{{$index}}]" />
+					<div ng-if="logproc==='Y'">
+					<font class=small>Insights text:</font><br>
+					<input name="logtxt{{$index}}" ng-model="step.logtxt"  ng-disabled="!enabledEdit[{{$index}}]" />
+					</div>
                 </td>
 				                       
                  

@@ -13,7 +13,7 @@ app.controller("MainController", function($scope,$http){
 	 
 	 
 	$scope.setupSteps = function() {		 
-		var previous_data = JSON.parse($scope.previous_data);	
+		var previous_data = JSON.parse($scope.previous_data);	 	
 		$scope.myurl = previous_data.myurl;
 		$scope.simjs = previous_data.simjs;
 		$scope.logproc = previous_data.logproc;
@@ -21,7 +21,7 @@ app.controller("MainController", function($scope,$http){
 	}
 	 	 
     $scope.addStep = function(){
-	    var step ={ actiontxt:"",cmd:"",stepaction:"",steplisten:"",listentxt:"",stepnum:"",disableEdit:false};
+	    var step ={ actiontxt:"",cmd:"",stepaction:"",steplisten:"",listentxt:"",stepnum:"",logtxt:"",disableEdit:false};
 		
 		$scope.steps.push(step);
 		$scope.enabledEdit[$scope.steps.length-1]=true;
@@ -35,9 +35,7 @@ app.controller("MainController", function($scope,$http){
 	}
 	
 	$scope.createScript = function(){
-		console.log("Script Steps: "+angular.toJson($scope.steps ));
-		
-		//$scope.previous_data = $scope.myurl + "~" + $scope.simjs + "~" + $scope.logproc + "~" + angular.toJson($scope.steps);
+		console.log("Script Steps: "+angular.toJson($scope.steps ));		
 		
 		$scope.previous_data = '{"myurl":"'+$scope.myurl+'","simjs":"'+$scope.simjs+'","logproc":"'+$scope.logproc+'","steps":' + angular.toJson($scope.steps) + '}';
 		
@@ -86,7 +84,11 @@ app.controller("MainController", function($scope,$http){
 				}	
 				
 				if ($scope.logproc == "Y") {
-						this_step= this_step + '.then(function(){logProc("Step:' + j + ' ... ' + stepaction + '");})';
+						logtext='Step:' + j ;
+						if ($scope.steps[i].logtxt != "") {
+							logtext=$scope.steps[i].logtxt;
+						}  
+						this_step= this_step + '.then(function(){logProc("' + logtext + '");})';
 				}
 				
 				$scope.steps[i].cmd=this_step;
