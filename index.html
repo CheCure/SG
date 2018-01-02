@@ -16,9 +16,16 @@ body {
 #mytable input{
           width:100%;
 }
+
 .submit-btn { 
 		color: navy; background-color: #ccccff; border: 1px solid navy; font-size: 22px;
 }
+
+.title1 {
+	color: #428bca;
+	font-size: 30px;
+}
+
 .whiteback {
 	background-color: #ffffff;
 	font-face: courier, arial;
@@ -107,12 +114,20 @@ function badNumber(field,msg) {
 <form name="SG">  
 <table width="100%">
 <tr>
-<td width="15%" valign="top" align="center" > &nbsp; </td>
-<td align=center><h1 align="center" style="color:#428bca">Synthetic Script Generator </h1></td>
-<td width=15%" valign="top" align="center"><a href="https://docs.newrelic.com/docs/synthetics/new-relic-synthetics/scripting-monitors/write-scripted-browsers">Doc</a>
-&nbsp;
-<a href=https://github.com/CheCure/SG>github</a></td>	  
- </tr></table>
+<td width="50%" valign="top">
+<table width="100%"><tr><td valign="top"><font class="title1"> &nbsp; Synthetic Script Generator</font></td></tr></table>
+</td>
+<td width="50%" valign="top" align="right">
+<table width="100%">
+<tr>
+<td width="33%"><a href=“https://docs.newrelic.com/docs/synthetics/new-relic-synthetics/scripting-monitors/write-scripted-browsers“>Doc</a></td>
+<td width="33%"><a href=https://github.com/CheCure/SG>github</a></td>
+<td width="33%"><a onclick=‘publishCode();’>Publish Script Toggle</a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
 	  
 	  <center>
 	  <table width=80% cellpadding="5" >
