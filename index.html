@@ -204,14 +204,14 @@ function badNumber(field,msg) {
                 <td>
                    <select  name="stepaction{{$index}}" ng-model="step.stepaction" ng-disabled="!enabledEdit[{{$index}}]"/>
 				    <option value="Click">Click
-            <option value="ClickVP">Click(not in viewport)
+					<option value="ClickVP">Click(not in viewport)
 				    <option value="Enter">Send text
-            <option value="Scroll">Scroll Viewport
-					  <option value="Validate">Validate text
-					  <option value="log">Console Log
-            <option value="FrameSetTop">Set Frame Top Context
-            <option value="FrameSF">Switch to Frame
-					  <option value="Sleep">Sleep
+					<option value="Scroll">Scroll Viewport
+					<option value="Validate">Validate text
+					<option value="log">Console Log
+					<option value="FrameSetTop">Set Frame Top Context
+					<option value="FrameSF">Switch to Frame
+					<option value="Sleep">Sleep
 
 					</select>
 					<br>
@@ -413,10 +413,10 @@ app.controller("MainController", function($scope,$http){
 					this_step = this_step + "\n";
 				}
 
-        if (stepaction == "FrameSetTop") {
-	        this_step = '.then(function() {return $browser.switchTo().defaultContent(); })';
-	        this_step = this_step + "\n";
-        }
+				if (stepaction == "FrameSetTop") {
+					this_step = '.then(function() {return $browser.switchTo().defaultContent(); })';
+					this_step = this_step + "\n";
+				}
 
 				if (stepaction == "Scroll") {
 					this_step = '.then(function() { return $browser.waitForAndFindElement('+steplisten+'("'+listentxt+'"), DefaultTimeout); })';
@@ -449,7 +449,7 @@ app.controller("MainController", function($scope,$http){
 					this_step = this_step + "\n";
 				}
 				if (stepaction == "Sleep") {
-						this_step = '.then(function(){return $browser.sleep(' + actiontxt +  ' ); })})';
+						this_step = '.then(function(){return $browser.sleep(' + actiontxt +  ' ); })';
 				}
 				if (stepaction == "log") {
 					    this_step = ' console.log ("' + j + ') ' + actiontxt + '");';
